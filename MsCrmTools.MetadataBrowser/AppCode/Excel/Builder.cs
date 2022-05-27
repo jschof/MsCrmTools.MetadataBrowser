@@ -54,5 +54,58 @@ namespace MsCrmTools.MetadataBrowser.AppCode.Excel
                 }
             }
         }
+
+        public void BuildFile(ExcelPackage innerWorkBook, ListView list, string sheetName)
+        {
+            bool sheetExists = true;
+            int index = 1;
+            int row;
+
+            ExcelWorksheet sheet = innerWorkBook.Workbook.Worksheets[sheetName];
+
+            if (sheet == null)
+            {
+                sheet = innerWorkBook.Workbook.Worksheets.Add(sheetName);
+                sheetExists = false;
+            }
+
+            if (sheetExists)
+            {
+                int colCount = sheet.Dimension.End.Column;  //get Column Count
+                int rowCount = sheet.Dimension.End.Row;     //get row count
+
+                row = rowCount + 1;
+            }
+            else // Write header
+            {
+                foreach (ColumnHeader column in list.Columns)
+                {
+                    sheet.Cells[1, index++].Value = column.Text;
+                }
+                ExcelRange r = sheet.Cells["1:1"];
+
+                r.Style.Font.Bold = true;
+                r.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                r.Style.Fill.BackgroundColor.SetColor(Color.Navy);
+                r.Style.Font.Color.SetColor(Color.White);
+
+                row = 2;
+            }
+
+            //int row = 2;
+            foreach (ListViewItem item in list.Items)
+            {
+                index = 1;
+
+                foreach (ListViewItem.ListViewSubItem subItem in item.SubItems)
+                {
+                    sheet.Cells[row, index++].Value = subItem.Text;
+                }
+
+                row++;
+            }
+
+            //innerWorkBook.Save();
+        }
     }
 }

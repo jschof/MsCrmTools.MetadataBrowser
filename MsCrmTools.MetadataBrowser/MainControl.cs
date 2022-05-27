@@ -12,10 +12,13 @@ using MsCrmTools.MetadataBrowser.AppCode.OptionSetMd;
 using MsCrmTools.MetadataBrowser.Forms;
 using MsCrmTools.MetadataBrowser.Helpers;
 using MsCrmTools.MetadataBrowser.UserControls;
+using OfficeOpenXml; // For Excel workbook
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO; // For Excel workbook FileInfo
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -566,40 +569,45 @@ namespace MsCrmTools.MetadataBrowser
             if (entityListView.SelectedItems.Count == 0)
                 return;
 
-            var emd = new EntityMetadataInfo((EntityMetadata)entityListView.SelectedItems[0].Tag);
+            int intIdx = 0;
+            int intCount = entityListView.SelectedItems.Count;
 
-            WorkAsync(new WorkAsyncInfo
+            while (intIdx < intCount)
             {
-                Message = "Loading Entity...",
-                AsyncArgument = emd,
-                Work = (bw, e) =>
+                var emd = new EntityMetadataInfo((EntityMetadata)entityListView.SelectedItems[intIdx].Tag);
+
+                WorkAsync(new WorkAsyncInfo
                 {
-                    var request = new RetrieveEntityRequest
+                    Message = "Loading Entity...",
+                    AsyncArgument = emd,
+                    Work = (bw, e) =>
                     {
-                        EntityFilters = EntityFilters.All,
-                        LogicalName = ((EntityMetadataInfo)e.Argument).LogicalName
-                    };
-                    var response = (RetrieveEntityResponse)Service.Execute(request);
-
-                    ColumnSet cols = new ColumnSet("rootcomponentbehavior");
-                    if (ConnectionDetail.OrganizationMajorVersion < 8)
-                    {
-                        cols = new ColumnSet();
-                    }
-
-                    var solutionComponents = Service.RetrieveMultiple(new QueryExpression("solutioncomponent")
-                    {
-                        NoLock = true,
-                        ColumnSet = cols,
-                        Criteria = new FilterExpression
+                        var request = new RetrieveEntityRequest
                         {
-                            Conditions =
+                            EntityFilters = EntityFilters.All,
+                            LogicalName = ((EntityMetadataInfo)e.Argument).LogicalName
+                        };
+                        var response = (RetrieveEntityResponse)Service.Execute(request);
+
+                        ColumnSet cols = new ColumnSet("rootcomponentbehavior");
+                        if (ConnectionDetail.OrganizationMajorVersion < 8)
+                        {
+                            cols = new ColumnSet();
+                        }
+
+                        var solutionComponents = Service.RetrieveMultiple(new QueryExpression("solutioncomponent")
+                        {
+                            NoLock = true,
+                            ColumnSet = cols,
+                            Criteria = new FilterExpression
                             {
+                                Conditions =
+                                {
                                 new ConditionExpression("objectid", ConditionOperator.Equal, emd.MetadataId)
-                            }
-                        },
-                        LinkEntities =
-                        {
+                                }
+                            },
+                            LinkEntities =
+                            {
                             new LinkEntity
                             {
                                 LinkFromEntityName =    "solutioncomponent",
@@ -616,40 +624,43 @@ namespace MsCrmTools.MetadataBrowser
                                     }
                                 }
                             }
-                        }
-                    });
+                            }
+                        });
 
-                    var tuple = new Tuple<EntityMetadata, EntityCollection>(response.EntityMetadata, solutionComponents);
+                        var tuple = new Tuple<EntityMetadata, EntityCollection>(response.EntityMetadata, solutionComponents);
 
-                    e.Result = tuple;
-                },
-                PostWorkCallBack = e =>
-                {
-                    var tuple = (Tuple<EntityMetadata, EntityCollection>)e.Result;
-
-                    TabPage tab;
-                    if (mainTabControl.TabPages.ContainsKey(emd.SchemaName))
+                        e.Result = tuple;
+                    },
+                    PostWorkCallBack = e =>
                     {
-                        tab = mainTabControl.TabPages[emd.SchemaName];
-                        ((EntityPropertiesControl)tab.Controls[0]).RefreshContent(tuple.Item1, tuple.Item2);
-                    }
-                    else
-                    {
-                        mainTabControl.TabPages.Add(emd.SchemaName, emd.SchemaName);
-                        tab = mainTabControl.TabPages[emd.SchemaName];
+                        var tuple = (Tuple<EntityMetadata, EntityCollection>)e.Result;
 
-                        var epc = new EntityPropertiesControl(tuple.Item1, tuple.Item2, lvcSettings, ConnectionDetail)
+                        TabPage tab;
+                        if (mainTabControl.TabPages.ContainsKey(emd.SchemaName))
                         {
-                            Dock = DockStyle.Fill,
-                            Name = tuple.Item1.SchemaName
-                        };
-                        epc.OnSelectedTabChanged += (s, evt2) => { mainTabControl_SelectedIndexChanged(mainTabControl, new EventArgs()); };
-                        epc.OnColumnSettingsUpdated += epc_OnColumnSettingsUpdated;
-                        tab.Controls.Add(epc);
-                        mainTabControl.SelectTab(tab);
+                            tab = mainTabControl.TabPages[emd.SchemaName];
+                            ((EntityPropertiesControl)tab.Controls[0]).RefreshContent(tuple.Item1, tuple.Item2);
+                        }
+                        else
+                        {
+                            mainTabControl.TabPages.Add(emd.SchemaName, emd.SchemaName);
+                            tab = mainTabControl.TabPages[emd.SchemaName];
+
+                            var epc = new EntityPropertiesControl(tuple.Item1, tuple.Item2, lvcSettings, ConnectionDetail)
+                            {
+                                Dock = DockStyle.Fill,
+                                Name = tuple.Item1.SchemaName
+                            };
+                            epc.OnSelectedTabChanged += (s, evt2) => { mainTabControl_SelectedIndexChanged(mainTabControl, new EventArgs()); };
+                            epc.OnColumnSettingsUpdated += epc_OnColumnSettingsUpdated;
+                            tab.Controls.Add(epc);
+                            mainTabControl.SelectTab(tab);
+                        }
                     }
-                }
-            });
+                });
+
+                intIdx++;
+            }
         }
 
         private void MainControl_Enter(object sender, EventArgs e)
@@ -823,6 +834,87 @@ namespace MsCrmTools.MetadataBrowser
 
             searchThread = new Thread(FilterItemsList);
             searchThread.Start(tstxtFilter.Text);
+        }
+
+        private void tsbDeselectAllTables_Click(object sender, EventArgs e)
+        {
+            entityListView.SelectedItems.Clear();
+        }
+
+        private void tsbSelectAllTables_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in entityListView.Items)
+            {
+                item.Selected = true;
+            }
+        }
+
+        private void tsbSelectInverseTables_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in entityListView.Items)
+            {
+                if (item.Selected)
+                {
+                    item.Selected = false;
+                }
+                else
+                {
+                    item.Selected = true;
+                }
+            }
+        }
+
+        private void tsbViewTables_Click(object sender, EventArgs e)
+        {
+            ExecuteMethod(LoadEntity);
+        }
+
+        private void tsbExportExcelAll_Click(object sender, EventArgs e)
+        {
+            if (entityListView.Items.Count == 0) return;
+
+            var sfd = new SaveFileDialog
+            {
+                Filter = @"Excel file (*.xlsx)|*.xlsx"
+            };
+
+            if (sfd.ShowDialog(this) != DialogResult.OK) return;
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage innerWorkBook = new ExcelPackage(new FileInfo(sfd.FileName));
+
+            var builder = new Builder();
+
+            builder.BuildFile(innerWorkBook, entityListView, "Tables");
+            builder.BuildFile(innerWorkBook, lvChoices, "Choices");
+
+            foreach (TabPage pgMain in mainTabControl.TabPages)
+            {
+                if ((pgMain.TabIndex == 0) || (pgMain.TabIndex == 1))
+                {
+                    continue;
+                }
+                else
+                {
+                    builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).attributeListView, "Columns");
+                    builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).keyListView, "Keys");
+                    builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).OneToManyListView, "OneToManyRelationships");
+                    builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).manyToManyListView, "ManyToManyRelationships");
+//                    builder.BuildFile(sfd.FileName, ((EntityPropertiesControl)pgMain.Controls[0]).privilegeListView, "Privileges");
+                    builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).lvSolutions, "Solutions");
+
+                    mainTabControl.TabPages.Remove(pgMain);
+                }
+            }
+
+            innerWorkBook.SaveAs(new FileInfo(sfd.FileName));
+
+            if (DialogResult.Yes == MessageBox.Show(this,
+                    $"File saved to {sfd.FileName}!\n\nWould you like to open it now? (Requires Microsoft Excel)",
+                    "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+            {
+                Process.Start("Excel.exe", $"\"{sfd.FileName}\"");
+            }
         }
     }
 }

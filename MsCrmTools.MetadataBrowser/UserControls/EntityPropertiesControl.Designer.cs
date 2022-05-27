@@ -46,6 +46,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.copyNameForWebApiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scMetadata = new System.Windows.Forms.SplitContainer();
             this.pgOptionSet = new System.Windows.Forms.PropertyGrid();
+            this.cmsOptionSet = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.attributePropertyGrid = new System.Windows.Forms.PropertyGrid();
             this.attributeToolStrip = new System.Windows.Forms.ToolStrip();
             this.tsbHideAttributePanel = new System.Windows.Forms.ToolStripButton();
@@ -129,9 +132,6 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.chSolutionBehavior = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbExportExcelSolutions = new System.Windows.Forms.ToolStripButton();
-            this.cmsOptionSet = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.entityToolStrip.SuspendLayout();
@@ -145,6 +145,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.scMetadata.Panel1.SuspendLayout();
             this.scMetadata.Panel2.SuspendLayout();
             this.scMetadata.SuspendLayout();
+            this.cmsOptionSet.SuspendLayout();
             this.attributeToolStrip.SuspendLayout();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.keySplitContainer)).BeginInit();
@@ -180,7 +181,6 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.privilegeToolStrip.SuspendLayout();
             this.tpSolutions.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.cmsOptionSet.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -195,9 +195,10 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tabControl1.Controls.Add(this.tpSolutions);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1292, 842);
+            this.tabControl1.Size = new System.Drawing.Size(861, 547);
             this.tabControl1.TabIndex = 4;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
@@ -205,10 +206,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tabPage1.Controls.Add(this.entityPropertyGrid);
             this.tabPage1.Controls.Add(this.entityToolStrip);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1284, 809);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Size = new System.Drawing.Size(853, 521);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Table";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -219,9 +221,10 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.entityPropertyGrid.CommandsForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.entityPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.entityPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.entityPropertyGrid.Location = new System.Drawing.Point(3, 37);
+            this.entityPropertyGrid.Location = new System.Drawing.Point(2, 27);
+            this.entityPropertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.entityPropertyGrid.Name = "entityPropertyGrid";
-            this.entityPropertyGrid.Size = new System.Drawing.Size(1278, 769);
+            this.entityPropertyGrid.Size = new System.Drawing.Size(849, 492);
             this.entityPropertyGrid.TabIndex = 5;
             this.entityPropertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
@@ -229,9 +232,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.entityToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbHideEntityPanel});
-            this.entityToolStrip.Location = new System.Drawing.Point(3, 3);
+            this.entityToolStrip.Location = new System.Drawing.Point(2, 2);
             this.entityToolStrip.Name = "entityToolStrip";
-            this.entityToolStrip.Size = new System.Drawing.Size(1278, 34);
+            this.entityToolStrip.Size = new System.Drawing.Size(849, 25);
             this.entityToolStrip.TabIndex = 4;
             this.entityToolStrip.Text = "toolStrip2";
             // 
@@ -240,7 +243,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbHideEntityPanel.Image = ((System.Drawing.Image)(resources.GetObject("tsbHideEntityPanel.Image")));
             this.tsbHideEntityPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHideEntityPanel.Name = "tsbHideEntityPanel";
-            this.tsbHideEntityPanel.Size = new System.Drawing.Size(75, 29);
+            this.tsbHideEntityPanel.Size = new System.Drawing.Size(56, 22);
             this.tsbHideEntityPanel.Text = "Close";
             this.tsbHideEntityPanel.Click += new System.EventHandler(this.tsbHidePanel_Click);
             // 
@@ -248,10 +251,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tabPage4.Controls.Add(this.attributesSplitContainer);
             this.tabPage4.Controls.Add(this.attributeToolStrip);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1284, 809);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage4.Size = new System.Drawing.Size(853, 521);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Columns";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -259,7 +263,8 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // attributesSplitContainer
             // 
             this.attributesSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.attributesSplitContainer.Location = new System.Drawing.Point(3, 37);
+            this.attributesSplitContainer.Location = new System.Drawing.Point(2, 27);
+            this.attributesSplitContainer.Margin = new System.Windows.Forms.Padding(2);
             this.attributesSplitContainer.Name = "attributesSplitContainer";
             // 
             // attributesSplitContainer.Panel1
@@ -269,8 +274,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // attributesSplitContainer.Panel2
             // 
             this.attributesSplitContainer.Panel2.Controls.Add(this.scMetadata);
-            this.attributesSplitContainer.Size = new System.Drawing.Size(1278, 769);
-            this.attributesSplitContainer.SplitterDistance = 559;
+            this.attributesSplitContainer.Size = new System.Drawing.Size(849, 492);
+            this.attributesSplitContainer.SplitterDistance = 371;
+            this.attributesSplitContainer.SplitterWidth = 3;
             this.attributesSplitContainer.TabIndex = 3;
             // 
             // attributeListView
@@ -281,8 +287,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.attributeListView.GridLines = true;
             this.attributeListView.HideSelection = false;
             this.attributeListView.Location = new System.Drawing.Point(0, 0);
+            this.attributeListView.Margin = new System.Windows.Forms.Padding(2);
             this.attributeListView.Name = "attributeListView";
-            this.attributeListView.Size = new System.Drawing.Size(559, 769);
+            this.attributeListView.Size = new System.Drawing.Size(371, 492);
             this.attributeListView.TabIndex = 1;
             this.attributeListView.UseCompatibleStateImageBehavior = false;
             this.attributeListView.View = System.Windows.Forms.View.Details;
@@ -298,31 +305,32 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsmiAttributesCopySchemaName,
             this.copyNameForWebApiToolStripMenuItem});
             this.cmsAttributes.Name = "cmsAttributes";
-            this.cmsAttributes.Size = new System.Drawing.Size(271, 100);
+            this.cmsAttributes.Size = new System.Drawing.Size(198, 70);
             this.cmsAttributes.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsAttributes_ItemClicked);
             // 
             // tsmiAttributesCopyLogicalName
             // 
             this.tsmiAttributesCopyLogicalName.Name = "tsmiAttributesCopyLogicalName";
-            this.tsmiAttributesCopyLogicalName.Size = new System.Drawing.Size(270, 32);
+            this.tsmiAttributesCopyLogicalName.Size = new System.Drawing.Size(197, 22);
             this.tsmiAttributesCopyLogicalName.Text = "Copy Logical name";
             // 
             // tsmiAttributesCopySchemaName
             // 
             this.tsmiAttributesCopySchemaName.Name = "tsmiAttributesCopySchemaName";
-            this.tsmiAttributesCopySchemaName.Size = new System.Drawing.Size(270, 32);
+            this.tsmiAttributesCopySchemaName.Size = new System.Drawing.Size(197, 22);
             this.tsmiAttributesCopySchemaName.Text = "Copy Schema name";
             // 
             // copyNameForWebApiToolStripMenuItem
             // 
             this.copyNameForWebApiToolStripMenuItem.Name = "copyNameForWebApiToolStripMenuItem";
-            this.copyNameForWebApiToolStripMenuItem.Size = new System.Drawing.Size(270, 32);
+            this.copyNameForWebApiToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.copyNameForWebApiToolStripMenuItem.Text = "Copy name for web api";
             // 
             // scMetadata
             // 
             this.scMetadata.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scMetadata.Location = new System.Drawing.Point(0, 0);
+            this.scMetadata.Margin = new System.Windows.Forms.Padding(2);
             this.scMetadata.Name = "scMetadata";
             this.scMetadata.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -334,7 +342,8 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // scMetadata.Panel2
             // 
             this.scMetadata.Panel2.Controls.Add(this.attributePropertyGrid);
-            this.scMetadata.Size = new System.Drawing.Size(715, 769);
+            this.scMetadata.Size = new System.Drawing.Size(475, 492);
+            this.scMetadata.SplitterWidth = 3;
             this.scMetadata.TabIndex = 3;
             // 
             // pgOptionSet
@@ -344,19 +353,43 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.pgOptionSet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgOptionSet.HelpVisible = false;
             this.pgOptionSet.Location = new System.Drawing.Point(0, 0);
+            this.pgOptionSet.Margin = new System.Windows.Forms.Padding(2);
             this.pgOptionSet.Name = "pgOptionSet";
             this.pgOptionSet.Size = new System.Drawing.Size(150, 50);
             this.pgOptionSet.TabIndex = 1;
             this.pgOptionSet.ToolbarVisible = false;
             this.pgOptionSet.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
+            // cmsOptionSet
+            // 
+            this.cmsOptionSet.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.cmsOptionSet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyValueToolStripMenuItem,
+            this.copyLabelToolStripMenuItem});
+            this.cmsOptionSet.Name = "cmsOptionSet";
+            this.cmsOptionSet.Size = new System.Drawing.Size(134, 48);
+            this.cmsOptionSet.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsOptionSet_ItemClicked);
+            // 
+            // copyValueToolStripMenuItem
+            // 
+            this.copyValueToolStripMenuItem.Name = "copyValueToolStripMenuItem";
+            this.copyValueToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyValueToolStripMenuItem.Text = "Copy value";
+            // 
+            // copyLabelToolStripMenuItem
+            // 
+            this.copyLabelToolStripMenuItem.Name = "copyLabelToolStripMenuItem";
+            this.copyLabelToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyLabelToolStripMenuItem.Text = "Copy label";
+            // 
             // attributePropertyGrid
             // 
             this.attributePropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.attributePropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.attributePropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.attributePropertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.attributePropertyGrid.Name = "attributePropertyGrid";
-            this.attributePropertyGrid.Size = new System.Drawing.Size(715, 769);
+            this.attributePropertyGrid.Size = new System.Drawing.Size(475, 492);
             this.attributePropertyGrid.TabIndex = 2;
             this.attributePropertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
@@ -372,9 +405,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbOpenInWebApp,
             this.toolStripSeparator3,
             this.tsbExportAttributesExcel});
-            this.attributeToolStrip.Location = new System.Drawing.Point(3, 3);
+            this.attributeToolStrip.Location = new System.Drawing.Point(2, 2);
             this.attributeToolStrip.Name = "attributeToolStrip";
-            this.attributeToolStrip.Size = new System.Drawing.Size(1278, 34);
+            this.attributeToolStrip.Size = new System.Drawing.Size(849, 25);
             this.attributeToolStrip.TabIndex = 2;
             this.attributeToolStrip.Text = "toolStrip3";
             // 
@@ -383,7 +416,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbHideAttributePanel.Image = ((System.Drawing.Image)(resources.GetObject("tsbHideAttributePanel.Image")));
             this.tsbHideAttributePanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHideAttributePanel.Name = "tsbHideAttributePanel";
-            this.tsbHideAttributePanel.Size = new System.Drawing.Size(125, 29);
+            this.tsbHideAttributePanel.Size = new System.Drawing.Size(84, 22);
             this.tsbHideAttributePanel.Text = "Hide panel";
             this.tsbHideAttributePanel.Visible = false;
             this.tsbHideAttributePanel.Click += new System.EventHandler(this.tsbHidePanel_Click);
@@ -393,19 +426,19 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbAttributeColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbAttributeColumns.Image")));
             this.tsbAttributeColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAttributeColumns.Name = "tsbAttributeColumns";
-            this.tsbAttributeColumns.Size = new System.Drawing.Size(122, 29);
+            this.tsbAttributeColumns.Size = new System.Drawing.Size(84, 22);
             this.tsbAttributeColumns.Text = "Columns...";
             this.tsbAttributeColumns.Click += new System.EventHandler(this.tsbColumns_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // tslSearchAttr
             // 
             this.tslSearchAttr.Name = "tslSearchAttr";
-            this.tslSearchAttr.Size = new System.Drawing.Size(64, 29);
+            this.tslSearchAttr.Size = new System.Drawing.Size(42, 22);
             this.tslSearchAttr.Text = "Search";
             // 
             // tstxtSearchContact
@@ -413,7 +446,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tstxtSearchContact.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tstxtSearchContact.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.tstxtSearchContact.Name = "tstxtSearchContact";
-            this.tstxtSearchContact.Size = new System.Drawing.Size(298, 34);
+            this.tstxtSearchContact.Size = new System.Drawing.Size(200, 25);
             this.tstxtSearchContact.Text = "Logical/Display Name or GUID";
             this.tstxtSearchContact.Enter += new System.EventHandler(this.tstxtSearch_Enter);
             this.tstxtSearchContact.TextChanged += new System.EventHandler(this.tstxtSearch_TextChanged);
@@ -421,28 +454,28 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbOpenInWebApp
             // 
             this.tsbOpenInWebApp.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpenInWebApp.Image")));
             this.tsbOpenInWebApp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbOpenInWebApp.Name = "tsbOpenInWebApp";
-            this.tsbOpenInWebApp.Size = new System.Drawing.Size(177, 29);
+            this.tsbOpenInWebApp.Size = new System.Drawing.Size(117, 22);
             this.tsbOpenInWebApp.Text = "Open in web app";
             this.tsbOpenInWebApp.Click += new System.EventHandler(this.tsbOpenInWebApp_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbExportAttributesExcel
             // 
             this.tsbExportAttributesExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportAttributesExcel.Image")));
             this.tsbExportAttributesExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExportAttributesExcel.Name = "tsbExportAttributesExcel";
-            this.tsbExportAttributesExcel.Size = new System.Drawing.Size(156, 29);
+            this.tsbExportAttributesExcel.Size = new System.Drawing.Size(105, 22);
             this.tsbExportAttributesExcel.Text = "Export to Excel";
             this.tsbExportAttributesExcel.Click += new System.EventHandler(this.tsbExportAttributesExcel_Click);
             // 
@@ -450,10 +483,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tabPage7.Controls.Add(this.keySplitContainer);
             this.tabPage7.Controls.Add(this.keysToolStrip);
-            this.tabPage7.Location = new System.Drawing.Point(4, 29);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1284, 809);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage7.Size = new System.Drawing.Size(853, 521);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Keys";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -461,7 +495,8 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // keySplitContainer
             // 
             this.keySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.keySplitContainer.Location = new System.Drawing.Point(3, 37);
+            this.keySplitContainer.Location = new System.Drawing.Point(2, 27);
+            this.keySplitContainer.Margin = new System.Windows.Forms.Padding(2);
             this.keySplitContainer.Name = "keySplitContainer";
             // 
             // keySplitContainer.Panel1
@@ -471,8 +506,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // keySplitContainer.Panel2
             // 
             this.keySplitContainer.Panel2.Controls.Add(this.keyPropertyGrid);
-            this.keySplitContainer.Size = new System.Drawing.Size(1278, 769);
-            this.keySplitContainer.SplitterDistance = 424;
+            this.keySplitContainer.Size = new System.Drawing.Size(849, 492);
+            this.keySplitContainer.SplitterDistance = 281;
+            this.keySplitContainer.SplitterWidth = 3;
             this.keySplitContainer.TabIndex = 5;
             // 
             // keyListView
@@ -482,8 +518,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.keyListView.GridLines = true;
             this.keyListView.HideSelection = false;
             this.keyListView.Location = new System.Drawing.Point(0, 0);
+            this.keyListView.Margin = new System.Windows.Forms.Padding(2);
             this.keyListView.Name = "keyListView";
-            this.keyListView.Size = new System.Drawing.Size(424, 769);
+            this.keyListView.Size = new System.Drawing.Size(281, 492);
             this.keyListView.TabIndex = 2;
             this.keyListView.UseCompatibleStateImageBehavior = false;
             this.keyListView.View = System.Windows.Forms.View.Details;
@@ -495,8 +532,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.keyPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.keyPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.keyPropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.keyPropertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.keyPropertyGrid.Name = "keyPropertyGrid";
-            this.keyPropertyGrid.Size = new System.Drawing.Size(850, 769);
+            this.keyPropertyGrid.Size = new System.Drawing.Size(565, 492);
             this.keyPropertyGrid.TabIndex = 1;
             this.keyPropertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
@@ -507,9 +545,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbKeyColumns,
             this.toolStripSeparator4,
             this.tsbExportKeysExcel});
-            this.keysToolStrip.Location = new System.Drawing.Point(3, 3);
+            this.keysToolStrip.Location = new System.Drawing.Point(2, 2);
             this.keysToolStrip.Name = "keysToolStrip";
-            this.keysToolStrip.Size = new System.Drawing.Size(1278, 34);
+            this.keysToolStrip.Size = new System.Drawing.Size(849, 25);
             this.keysToolStrip.TabIndex = 4;
             this.keysToolStrip.Text = "toolStrip3";
             // 
@@ -518,7 +556,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbHideKeyPanel.Image = ((System.Drawing.Image)(resources.GetObject("tsbHideKeyPanel.Image")));
             this.tsbHideKeyPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHideKeyPanel.Name = "tsbHideKeyPanel";
-            this.tsbHideKeyPanel.Size = new System.Drawing.Size(117, 29);
+            this.tsbHideKeyPanel.Size = new System.Drawing.Size(84, 22);
             this.tsbHideKeyPanel.Text = "Hide panel";
             this.tsbHideKeyPanel.Visible = false;
             this.tsbHideKeyPanel.Click += new System.EventHandler(this.tsbHidePanel_Click);
@@ -528,21 +566,21 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbKeyColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbKeyColumns.Image")));
             this.tsbKeyColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbKeyColumns.Name = "tsbKeyColumns";
-            this.tsbKeyColumns.Size = new System.Drawing.Size(114, 29);
+            this.tsbKeyColumns.Size = new System.Drawing.Size(84, 22);
             this.tsbKeyColumns.Text = "Columns...";
             this.tsbKeyColumns.Click += new System.EventHandler(this.tsbColumns_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbExportKeysExcel
             // 
             this.tsbExportKeysExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportKeysExcel.Image")));
             this.tsbExportKeysExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExportKeysExcel.Name = "tsbExportKeysExcel";
-            this.tsbExportKeysExcel.Size = new System.Drawing.Size(148, 29);
+            this.tsbExportKeysExcel.Size = new System.Drawing.Size(105, 22);
             this.tsbExportKeysExcel.Text = "Export to Excel";
             this.tsbExportKeysExcel.Click += new System.EventHandler(this.tsbExportKeysExcel_Click);
             // 
@@ -550,10 +588,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tabPage2.Controls.Add(this.oneToManySplitContainer);
             this.tabPage2.Controls.Add(this.manyToOneToolStrip);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1284, 809);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Size = new System.Drawing.Size(853, 521);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "OneToManyRelationships";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -561,7 +600,8 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // oneToManySplitContainer
             // 
             this.oneToManySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.oneToManySplitContainer.Location = new System.Drawing.Point(3, 37);
+            this.oneToManySplitContainer.Location = new System.Drawing.Point(2, 27);
+            this.oneToManySplitContainer.Margin = new System.Windows.Forms.Padding(2);
             this.oneToManySplitContainer.Name = "oneToManySplitContainer";
             // 
             // oneToManySplitContainer.Panel1
@@ -571,8 +611,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // oneToManySplitContainer.Panel2
             // 
             this.oneToManySplitContainer.Panel2.Controls.Add(this.OneToManyPropertyGrid);
-            this.oneToManySplitContainer.Size = new System.Drawing.Size(1278, 769);
-            this.oneToManySplitContainer.SplitterDistance = 418;
+            this.oneToManySplitContainer.Size = new System.Drawing.Size(849, 492);
+            this.oneToManySplitContainer.SplitterDistance = 277;
+            this.oneToManySplitContainer.SplitterWidth = 3;
             this.oneToManySplitContainer.TabIndex = 4;
             // 
             // OneToManyListView
@@ -583,8 +624,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.OneToManyListView.GridLines = true;
             this.OneToManyListView.HideSelection = false;
             this.OneToManyListView.Location = new System.Drawing.Point(0, 0);
+            this.OneToManyListView.Margin = new System.Windows.Forms.Padding(2);
             this.OneToManyListView.Name = "OneToManyListView";
-            this.OneToManyListView.Size = new System.Drawing.Size(418, 769);
+            this.OneToManyListView.Size = new System.Drawing.Size(277, 492);
             this.OneToManyListView.TabIndex = 1;
             this.OneToManyListView.UseCompatibleStateImageBehavior = false;
             this.OneToManyListView.View = System.Windows.Forms.View.Details;
@@ -600,25 +642,25 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsmiRelationshipCopyReferencedNavigationProperty,
             this.tsmiRelationshipCopyReferencingNavigationProperty});
             this.cmsRelationships.Name = "cmsAttributes";
-            this.cmsRelationships.Size = new System.Drawing.Size(386, 100);
+            this.cmsRelationships.Size = new System.Drawing.Size(326, 70);
             this.cmsRelationships.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsRelationships_ItemClicked);
             // 
             // tsmiRelationshipCopySchemaName
             // 
             this.tsmiRelationshipCopySchemaName.Name = "tsmiRelationshipCopySchemaName";
-            this.tsmiRelationshipCopySchemaName.Size = new System.Drawing.Size(385, 32);
+            this.tsmiRelationshipCopySchemaName.Size = new System.Drawing.Size(325, 22);
             this.tsmiRelationshipCopySchemaName.Text = "Copy Schema name";
             // 
             // tsmiRelationshipCopyReferencedNavigationProperty
             // 
             this.tsmiRelationshipCopyReferencedNavigationProperty.Name = "tsmiRelationshipCopyReferencedNavigationProperty";
-            this.tsmiRelationshipCopyReferencedNavigationProperty.Size = new System.Drawing.Size(385, 32);
+            this.tsmiRelationshipCopyReferencedNavigationProperty.Size = new System.Drawing.Size(325, 22);
             this.tsmiRelationshipCopyReferencedNavigationProperty.Text = "Copy Referenced navigation property (children)";
             // 
             // tsmiRelationshipCopyReferencingNavigationProperty
             // 
             this.tsmiRelationshipCopyReferencingNavigationProperty.Name = "tsmiRelationshipCopyReferencingNavigationProperty";
-            this.tsmiRelationshipCopyReferencingNavigationProperty.Size = new System.Drawing.Size(385, 32);
+            this.tsmiRelationshipCopyReferencingNavigationProperty.Size = new System.Drawing.Size(325, 22);
             this.tsmiRelationshipCopyReferencingNavigationProperty.Text = "Copy Referencing navigation property (parent)";
             // 
             // OneToManyPropertyGrid
@@ -626,8 +668,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.OneToManyPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.OneToManyPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OneToManyPropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.OneToManyPropertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.OneToManyPropertyGrid.Name = "OneToManyPropertyGrid";
-            this.OneToManyPropertyGrid.Size = new System.Drawing.Size(856, 769);
+            this.OneToManyPropertyGrid.Size = new System.Drawing.Size(569, 492);
             this.OneToManyPropertyGrid.TabIndex = 0;
             this.OneToManyPropertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
@@ -641,9 +684,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tstxtSearchOtm,
             this.toolStripSeparator5,
             this.tsbExportOmRelsExcel});
-            this.manyToOneToolStrip.Location = new System.Drawing.Point(3, 3);
+            this.manyToOneToolStrip.Location = new System.Drawing.Point(2, 2);
             this.manyToOneToolStrip.Name = "manyToOneToolStrip";
-            this.manyToOneToolStrip.Size = new System.Drawing.Size(1278, 34);
+            this.manyToOneToolStrip.Size = new System.Drawing.Size(849, 25);
             this.manyToOneToolStrip.TabIndex = 3;
             this.manyToOneToolStrip.Text = "toolStrip3";
             // 
@@ -652,7 +695,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbHideOneToManyPanel.Image = ((System.Drawing.Image)(resources.GetObject("tsbHideOneToManyPanel.Image")));
             this.tsbHideOneToManyPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHideOneToManyPanel.Name = "tsbHideOneToManyPanel";
-            this.tsbHideOneToManyPanel.Size = new System.Drawing.Size(117, 29);
+            this.tsbHideOneToManyPanel.Size = new System.Drawing.Size(84, 22);
             this.tsbHideOneToManyPanel.Text = "Hide panel";
             this.tsbHideOneToManyPanel.Visible = false;
             this.tsbHideOneToManyPanel.Click += new System.EventHandler(this.tsbHidePanel_Click);
@@ -662,39 +705,39 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbOneToManyColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbOneToManyColumns.Image")));
             this.tsbOneToManyColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbOneToManyColumns.Name = "tsbOneToManyColumns";
-            this.tsbOneToManyColumns.Size = new System.Drawing.Size(114, 29);
+            this.tsbOneToManyColumns.Size = new System.Drawing.Size(84, 22);
             this.tsbOneToManyColumns.Text = "Columns...";
             this.tsbOneToManyColumns.Click += new System.EventHandler(this.tsbColumns_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(64, 29);
+            this.toolStripLabel1.Size = new System.Drawing.Size(42, 22);
             this.toolStripLabel1.Text = "Search";
             // 
             // tstxtSearchOtm
             // 
             this.tstxtSearchOtm.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tstxtSearchOtm.Name = "tstxtSearchOtm";
-            this.tstxtSearchOtm.Size = new System.Drawing.Size(298, 34);
+            this.tstxtSearchOtm.Size = new System.Drawing.Size(200, 25);
             this.tstxtSearchOtm.TextChanged += new System.EventHandler(this.tstxtSearch_TextChanged);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbExportOmRelsExcel
             // 
             this.tsbExportOmRelsExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportOmRelsExcel.Image")));
             this.tsbExportOmRelsExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExportOmRelsExcel.Name = "tsbExportOmRelsExcel";
-            this.tsbExportOmRelsExcel.Size = new System.Drawing.Size(148, 29);
+            this.tsbExportOmRelsExcel.Size = new System.Drawing.Size(105, 22);
             this.tsbExportOmRelsExcel.Text = "Export to Excel";
             this.tsbExportOmRelsExcel.Click += new System.EventHandler(this.tsbExportOmRelsExcel_Click);
             // 
@@ -702,10 +745,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tabPage6.Controls.Add(this.manyToOneSplitContainer);
             this.tabPage6.Controls.Add(this.toolStrip2);
-            this.tabPage6.Location = new System.Drawing.Point(4, 29);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1284, 809);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage6.Size = new System.Drawing.Size(853, 521);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "ManyToOneRelationships";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -713,7 +757,8 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // manyToOneSplitContainer
             // 
             this.manyToOneSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.manyToOneSplitContainer.Location = new System.Drawing.Point(3, 37);
+            this.manyToOneSplitContainer.Location = new System.Drawing.Point(2, 27);
+            this.manyToOneSplitContainer.Margin = new System.Windows.Forms.Padding(2);
             this.manyToOneSplitContainer.Name = "manyToOneSplitContainer";
             // 
             // manyToOneSplitContainer.Panel1
@@ -723,8 +768,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // manyToOneSplitContainer.Panel2
             // 
             this.manyToOneSplitContainer.Panel2.Controls.Add(this.manyToOnePropertyGrid);
-            this.manyToOneSplitContainer.Size = new System.Drawing.Size(1278, 769);
-            this.manyToOneSplitContainer.SplitterDistance = 418;
+            this.manyToOneSplitContainer.Size = new System.Drawing.Size(849, 492);
+            this.manyToOneSplitContainer.SplitterDistance = 277;
+            this.manyToOneSplitContainer.SplitterWidth = 3;
             this.manyToOneSplitContainer.TabIndex = 6;
             // 
             // manyToOneListView
@@ -735,8 +781,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.manyToOneListView.GridLines = true;
             this.manyToOneListView.HideSelection = false;
             this.manyToOneListView.Location = new System.Drawing.Point(0, 0);
+            this.manyToOneListView.Margin = new System.Windows.Forms.Padding(2);
             this.manyToOneListView.Name = "manyToOneListView";
-            this.manyToOneListView.Size = new System.Drawing.Size(418, 769);
+            this.manyToOneListView.Size = new System.Drawing.Size(277, 492);
             this.manyToOneListView.TabIndex = 1;
             this.manyToOneListView.UseCompatibleStateImageBehavior = false;
             this.manyToOneListView.View = System.Windows.Forms.View.Details;
@@ -749,14 +796,14 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.manyToOnePropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.manyToOnePropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.manyToOnePropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.manyToOnePropertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.manyToOnePropertyGrid.Name = "manyToOnePropertyGrid";
-            this.manyToOnePropertyGrid.Size = new System.Drawing.Size(856, 769);
+            this.manyToOnePropertyGrid.Size = new System.Drawing.Size(569, 492);
             this.manyToOnePropertyGrid.TabIndex = 0;
             this.manyToOnePropertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
             // toolStrip2
             // 
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbHideManyToOnePanel,
             this.tsbManyToOneColumns,
@@ -765,9 +812,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tstxtSearchMtO,
             this.toolStripSeparator11,
             this.tsbExportMoRelsExcel});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip2.Location = new System.Drawing.Point(2, 2);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1278, 34);
+            this.toolStrip2.Size = new System.Drawing.Size(849, 25);
             this.toolStrip2.TabIndex = 5;
             this.toolStrip2.Text = "toolStrip3";
             // 
@@ -776,7 +823,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbHideManyToOnePanel.Image = ((System.Drawing.Image)(resources.GetObject("tsbHideManyToOnePanel.Image")));
             this.tsbHideManyToOnePanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHideManyToOnePanel.Name = "tsbHideManyToOnePanel";
-            this.tsbHideManyToOnePanel.Size = new System.Drawing.Size(125, 29);
+            this.tsbHideManyToOnePanel.Size = new System.Drawing.Size(84, 22);
             this.tsbHideManyToOnePanel.Text = "Hide panel";
             this.tsbHideManyToOnePanel.Visible = false;
             this.tsbHideManyToOnePanel.Click += new System.EventHandler(this.tsbHidePanel_Click);
@@ -786,39 +833,39 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbManyToOneColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbManyToOneColumns.Image")));
             this.tsbManyToOneColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbManyToOneColumns.Name = "tsbManyToOneColumns";
-            this.tsbManyToOneColumns.Size = new System.Drawing.Size(122, 29);
+            this.tsbManyToOneColumns.Size = new System.Drawing.Size(84, 22);
             this.tsbManyToOneColumns.Text = "Columns...";
             this.tsbManyToOneColumns.Click += new System.EventHandler(this.tsbColumns_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(64, 29);
+            this.toolStripLabel2.Size = new System.Drawing.Size(42, 22);
             this.toolStripLabel2.Text = "Search";
             // 
             // tstxtSearchMtO
             // 
             this.tstxtSearchMtO.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tstxtSearchMtO.Name = "tstxtSearchMtO";
-            this.tstxtSearchMtO.Size = new System.Drawing.Size(298, 34);
+            this.tstxtSearchMtO.Size = new System.Drawing.Size(200, 25);
             this.tstxtSearchMtO.TextChanged += new System.EventHandler(this.tstxtSearch_TextChanged);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbExportMoRelsExcel
             // 
             this.tsbExportMoRelsExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportMoRelsExcel.Image")));
             this.tsbExportMoRelsExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExportMoRelsExcel.Name = "tsbExportMoRelsExcel";
-            this.tsbExportMoRelsExcel.Size = new System.Drawing.Size(156, 29);
+            this.tsbExportMoRelsExcel.Size = new System.Drawing.Size(105, 22);
             this.tsbExportMoRelsExcel.Text = "Export to Excel";
             this.tsbExportMoRelsExcel.Click += new System.EventHandler(this.tsbExportMoRelsExcel_Click);
             // 
@@ -826,10 +873,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tabPage3.Controls.Add(this.manyToManySplitContainer);
             this.tabPage3.Controls.Add(this.manyToManyToolStrip);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1284, 809);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage3.Size = new System.Drawing.Size(853, 521);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ManyToManyRelationships";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -837,7 +885,8 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // manyToManySplitContainer
             // 
             this.manyToManySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.manyToManySplitContainer.Location = new System.Drawing.Point(3, 37);
+            this.manyToManySplitContainer.Location = new System.Drawing.Point(2, 27);
+            this.manyToManySplitContainer.Margin = new System.Windows.Forms.Padding(2);
             this.manyToManySplitContainer.Name = "manyToManySplitContainer";
             // 
             // manyToManySplitContainer.Panel1
@@ -847,8 +896,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // manyToManySplitContainer.Panel2
             // 
             this.manyToManySplitContainer.Panel2.Controls.Add(this.manyToManyPropertyGrid);
-            this.manyToManySplitContainer.Size = new System.Drawing.Size(1278, 769);
-            this.manyToManySplitContainer.SplitterDistance = 418;
+            this.manyToManySplitContainer.Size = new System.Drawing.Size(849, 492);
+            this.manyToManySplitContainer.SplitterDistance = 277;
+            this.manyToManySplitContainer.SplitterWidth = 3;
             this.manyToManySplitContainer.TabIndex = 4;
             // 
             // manyToManyListView
@@ -859,8 +909,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.manyToManyListView.GridLines = true;
             this.manyToManyListView.HideSelection = false;
             this.manyToManyListView.Location = new System.Drawing.Point(0, 0);
+            this.manyToManyListView.Margin = new System.Windows.Forms.Padding(2);
             this.manyToManyListView.Name = "manyToManyListView";
-            this.manyToManyListView.Size = new System.Drawing.Size(418, 769);
+            this.manyToManyListView.Size = new System.Drawing.Size(277, 492);
             this.manyToManyListView.TabIndex = 1;
             this.manyToManyListView.UseCompatibleStateImageBehavior = false;
             this.manyToManyListView.View = System.Windows.Forms.View.Details;
@@ -876,25 +927,25 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsmiRelNNCopyEntity1NavigationProperty,
             this.tsmiRelNNCopyEntity2NavigationProperty});
             this.cmsNNRelationship.Name = "cmsAttributes";
-            this.cmsNNRelationship.Size = new System.Drawing.Size(353, 100);
+            this.cmsNNRelationship.Size = new System.Drawing.Size(252, 70);
             this.cmsNNRelationship.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsNNRelationship_ItemClicked);
             // 
             // tsmiRelNNCopySchemaName
             // 
             this.tsmiRelNNCopySchemaName.Name = "tsmiRelNNCopySchemaName";
-            this.tsmiRelNNCopySchemaName.Size = new System.Drawing.Size(352, 32);
+            this.tsmiRelNNCopySchemaName.Size = new System.Drawing.Size(251, 22);
             this.tsmiRelNNCopySchemaName.Text = "Copy Schema name";
             // 
             // tsmiRelNNCopyEntity1NavigationProperty
             // 
             this.tsmiRelNNCopyEntity1NavigationProperty.Name = "tsmiRelNNCopyEntity1NavigationProperty";
-            this.tsmiRelNNCopyEntity1NavigationProperty.Size = new System.Drawing.Size(352, 32);
+            this.tsmiRelNNCopyEntity1NavigationProperty.Size = new System.Drawing.Size(251, 22);
             this.tsmiRelNNCopyEntity1NavigationProperty.Text = "Copy Entity 1 navigation property";
             // 
             // tsmiRelNNCopyEntity2NavigationProperty
             // 
             this.tsmiRelNNCopyEntity2NavigationProperty.Name = "tsmiRelNNCopyEntity2NavigationProperty";
-            this.tsmiRelNNCopyEntity2NavigationProperty.Size = new System.Drawing.Size(352, 32);
+            this.tsmiRelNNCopyEntity2NavigationProperty.Size = new System.Drawing.Size(251, 22);
             this.tsmiRelNNCopyEntity2NavigationProperty.Text = "Copy Entity 2 navigation property";
             // 
             // manyToManyPropertyGrid
@@ -902,8 +953,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.manyToManyPropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.manyToManyPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.manyToManyPropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.manyToManyPropertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.manyToManyPropertyGrid.Name = "manyToManyPropertyGrid";
-            this.manyToManyPropertyGrid.Size = new System.Drawing.Size(856, 769);
+            this.manyToManyPropertyGrid.Size = new System.Drawing.Size(569, 492);
             this.manyToManyPropertyGrid.TabIndex = 0;
             this.manyToManyPropertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
@@ -917,9 +969,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tstxtSearchM2M,
             this.toolStripSeparator7,
             this.tsbExportMmRelsExcel});
-            this.manyToManyToolStrip.Location = new System.Drawing.Point(3, 3);
+            this.manyToManyToolStrip.Location = new System.Drawing.Point(2, 2);
             this.manyToManyToolStrip.Name = "manyToManyToolStrip";
-            this.manyToManyToolStrip.Size = new System.Drawing.Size(1278, 34);
+            this.manyToManyToolStrip.Size = new System.Drawing.Size(849, 25);
             this.manyToManyToolStrip.TabIndex = 3;
             this.manyToManyToolStrip.Text = "toolStrip3";
             // 
@@ -928,7 +980,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbHideManyToManyPanel.Image = ((System.Drawing.Image)(resources.GetObject("tsbHideManyToManyPanel.Image")));
             this.tsbHideManyToManyPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHideManyToManyPanel.Name = "tsbHideManyToManyPanel";
-            this.tsbHideManyToManyPanel.Size = new System.Drawing.Size(117, 29);
+            this.tsbHideManyToManyPanel.Size = new System.Drawing.Size(84, 22);
             this.tsbHideManyToManyPanel.Text = "Hide panel";
             this.tsbHideManyToManyPanel.Visible = false;
             this.tsbHideManyToManyPanel.Click += new System.EventHandler(this.tsbHidePanel_Click);
@@ -938,39 +990,39 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbManyToManyColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbManyToManyColumns.Image")));
             this.tsbManyToManyColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbManyToManyColumns.Name = "tsbManyToManyColumns";
-            this.tsbManyToManyColumns.Size = new System.Drawing.Size(114, 29);
+            this.tsbManyToManyColumns.Size = new System.Drawing.Size(84, 22);
             this.tsbManyToManyColumns.Text = "Columns...";
             this.tsbManyToManyColumns.Click += new System.EventHandler(this.tsbColumns_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(64, 29);
+            this.toolStripLabel3.Size = new System.Drawing.Size(42, 22);
             this.toolStripLabel3.Text = "Search";
             // 
             // tstxtSearchM2M
             // 
             this.tstxtSearchM2M.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tstxtSearchM2M.Name = "tstxtSearchM2M";
-            this.tstxtSearchM2M.Size = new System.Drawing.Size(298, 34);
+            this.tstxtSearchM2M.Size = new System.Drawing.Size(200, 25);
             this.tstxtSearchM2M.TextChanged += new System.EventHandler(this.tstxtSearch_TextChanged);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbExportMmRelsExcel
             // 
             this.tsbExportMmRelsExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportMmRelsExcel.Image")));
             this.tsbExportMmRelsExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExportMmRelsExcel.Name = "tsbExportMmRelsExcel";
-            this.tsbExportMmRelsExcel.Size = new System.Drawing.Size(148, 29);
+            this.tsbExportMmRelsExcel.Size = new System.Drawing.Size(105, 22);
             this.tsbExportMmRelsExcel.Text = "Export to Excel";
             this.tsbExportMmRelsExcel.Click += new System.EventHandler(this.tsbExportMmRelsExcel_Click);
             // 
@@ -978,10 +1030,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tabPage5.Controls.Add(this.privilegeSplitContainer);
             this.tabPage5.Controls.Add(this.privilegeToolStrip);
-            this.tabPage5.Location = new System.Drawing.Point(4, 29);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1284, 809);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage5.Size = new System.Drawing.Size(853, 521);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Privileges";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -989,7 +1042,8 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // privilegeSplitContainer
             // 
             this.privilegeSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.privilegeSplitContainer.Location = new System.Drawing.Point(3, 37);
+            this.privilegeSplitContainer.Location = new System.Drawing.Point(2, 27);
+            this.privilegeSplitContainer.Margin = new System.Windows.Forms.Padding(2);
             this.privilegeSplitContainer.Name = "privilegeSplitContainer";
             // 
             // privilegeSplitContainer.Panel1
@@ -999,8 +1053,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // privilegeSplitContainer.Panel2
             // 
             this.privilegeSplitContainer.Panel2.Controls.Add(this.privilegePropertyGrid);
-            this.privilegeSplitContainer.Size = new System.Drawing.Size(1278, 769);
-            this.privilegeSplitContainer.SplitterDistance = 417;
+            this.privilegeSplitContainer.Size = new System.Drawing.Size(849, 492);
+            this.privilegeSplitContainer.SplitterDistance = 277;
+            this.privilegeSplitContainer.SplitterWidth = 3;
             this.privilegeSplitContainer.TabIndex = 4;
             // 
             // privilegeListView
@@ -1010,8 +1065,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.privilegeListView.GridLines = true;
             this.privilegeListView.HideSelection = false;
             this.privilegeListView.Location = new System.Drawing.Point(0, 0);
+            this.privilegeListView.Margin = new System.Windows.Forms.Padding(2);
             this.privilegeListView.Name = "privilegeListView";
-            this.privilegeListView.Size = new System.Drawing.Size(417, 769);
+            this.privilegeListView.Size = new System.Drawing.Size(277, 492);
             this.privilegeListView.TabIndex = 1;
             this.privilegeListView.UseCompatibleStateImageBehavior = false;
             this.privilegeListView.View = System.Windows.Forms.View.Details;
@@ -1024,8 +1080,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.privilegePropertyGrid.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             this.privilegePropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.privilegePropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.privilegePropertyGrid.Margin = new System.Windows.Forms.Padding(2);
             this.privilegePropertyGrid.Name = "privilegePropertyGrid";
-            this.privilegePropertyGrid.Size = new System.Drawing.Size(857, 769);
+            this.privilegePropertyGrid.Size = new System.Drawing.Size(569, 492);
             this.privilegePropertyGrid.TabIndex = 0;
             this.privilegePropertyGrid.ViewForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(1)))));
             // 
@@ -1036,9 +1093,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbPrivilegeColumns,
             this.toolStripSeparator8,
             this.tsbExportPrivExcel});
-            this.privilegeToolStrip.Location = new System.Drawing.Point(3, 3);
+            this.privilegeToolStrip.Location = new System.Drawing.Point(2, 2);
             this.privilegeToolStrip.Name = "privilegeToolStrip";
-            this.privilegeToolStrip.Size = new System.Drawing.Size(1278, 34);
+            this.privilegeToolStrip.Size = new System.Drawing.Size(849, 25);
             this.privilegeToolStrip.TabIndex = 3;
             this.privilegeToolStrip.Text = "toolStrip3";
             // 
@@ -1047,7 +1104,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbHidePrivilegePanel.Image = ((System.Drawing.Image)(resources.GetObject("tsbHidePrivilegePanel.Image")));
             this.tsbHidePrivilegePanel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHidePrivilegePanel.Name = "tsbHidePrivilegePanel";
-            this.tsbHidePrivilegePanel.Size = new System.Drawing.Size(117, 29);
+            this.tsbHidePrivilegePanel.Size = new System.Drawing.Size(84, 22);
             this.tsbHidePrivilegePanel.Text = "Hide panel";
             this.tsbHidePrivilegePanel.Visible = false;
             this.tsbHidePrivilegePanel.Click += new System.EventHandler(this.tsbHidePanel_Click);
@@ -1057,21 +1114,21 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbPrivilegeColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbPrivilegeColumns.Image")));
             this.tsbPrivilegeColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPrivilegeColumns.Name = "tsbPrivilegeColumns";
-            this.tsbPrivilegeColumns.Size = new System.Drawing.Size(114, 29);
+            this.tsbPrivilegeColumns.Size = new System.Drawing.Size(84, 22);
             this.tsbPrivilegeColumns.Text = "Columns...";
             this.tsbPrivilegeColumns.Click += new System.EventHandler(this.tsbColumns_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbExportPrivExcel
             // 
             this.tsbExportPrivExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportPrivExcel.Image")));
             this.tsbExportPrivExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExportPrivExcel.Name = "tsbExportPrivExcel";
-            this.tsbExportPrivExcel.Size = new System.Drawing.Size(148, 29);
+            this.tsbExportPrivExcel.Size = new System.Drawing.Size(105, 22);
             this.tsbExportPrivExcel.Text = "Export to Excel";
             this.tsbExportPrivExcel.Click += new System.EventHandler(this.tsbExportPrivExcel_Click);
             // 
@@ -1079,10 +1136,11 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.tpSolutions.Controls.Add(this.lvSolutions);
             this.tpSolutions.Controls.Add(this.toolStrip1);
-            this.tpSolutions.Location = new System.Drawing.Point(4, 29);
+            this.tpSolutions.Location = new System.Drawing.Point(4, 22);
+            this.tpSolutions.Margin = new System.Windows.Forms.Padding(2);
             this.tpSolutions.Name = "tpSolutions";
-            this.tpSolutions.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSolutions.Size = new System.Drawing.Size(1284, 809);
+            this.tpSolutions.Padding = new System.Windows.Forms.Padding(2);
+            this.tpSolutions.Size = new System.Drawing.Size(853, 521);
             this.tpSolutions.TabIndex = 7;
             this.tpSolutions.Text = "Solutions";
             this.tpSolutions.UseVisualStyleBackColor = true;
@@ -1099,9 +1157,10 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.lvSolutions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvSolutions.FullRowSelect = true;
             this.lvSolutions.HideSelection = false;
-            this.lvSolutions.Location = new System.Drawing.Point(3, 37);
+            this.lvSolutions.Location = new System.Drawing.Point(2, 27);
+            this.lvSolutions.Margin = new System.Windows.Forms.Padding(2);
             this.lvSolutions.Name = "lvSolutions";
-            this.lvSolutions.Size = new System.Drawing.Size(1278, 769);
+            this.lvSolutions.Size = new System.Drawing.Size(849, 492);
             this.lvSolutions.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvSolutions.TabIndex = 5;
             this.lvSolutions.UseCompatibleStateImageBehavior = false;
@@ -1141,9 +1200,9 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbExportExcelSolutions});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Location = new System.Drawing.Point(2, 2);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1278, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(849, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip3";
             // 
@@ -1152,39 +1211,18 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tsbExportExcelSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportExcelSolutions.Image")));
             this.tsbExportExcelSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExportExcelSolutions.Name = "tsbExportExcelSolutions";
-            this.tsbExportExcelSolutions.Size = new System.Drawing.Size(148, 29);
+            this.tsbExportExcelSolutions.Size = new System.Drawing.Size(105, 22);
             this.tsbExportExcelSolutions.Text = "Export to Excel";
             this.tsbExportExcelSolutions.Click += new System.EventHandler(this.tsbExportExcelSolutions_Click);
             // 
-            // cmsOptionSet
-            // 
-            this.cmsOptionSet.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.cmsOptionSet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyValueToolStripMenuItem,
-            this.copyLabelToolStripMenuItem});
-            this.cmsOptionSet.Name = "cmsOptionSet";
-            this.cmsOptionSet.Size = new System.Drawing.Size(208, 82);
-            this.cmsOptionSet.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsOptionSet_ItemClicked);
-            // 
-            // copyValueToolStripMenuItem
-            // 
-            this.copyValueToolStripMenuItem.Name = "copyValueToolStripMenuItem";
-            this.copyValueToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
-            this.copyValueToolStripMenuItem.Text = "Copy value";
-            // 
-            // copyLabelToolStripMenuItem
-            // 
-            this.copyLabelToolStripMenuItem.Name = "copyLabelToolStripMenuItem";
-            this.copyLabelToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
-            this.copyLabelToolStripMenuItem.Text = "Copy label";
-            // 
             // EntityPropertiesControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "EntityPropertiesControl";
-            this.Size = new System.Drawing.Size(1292, 842);
+            this.Size = new System.Drawing.Size(861, 547);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1201,6 +1239,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.scMetadata.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scMetadata)).EndInit();
             this.scMetadata.ResumeLayout(false);
+            this.cmsOptionSet.ResumeLayout(false);
             this.attributeToolStrip.ResumeLayout(false);
             this.attributeToolStrip.PerformLayout();
             this.tabPage7.ResumeLayout(false);
@@ -1249,7 +1288,6 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             this.tpSolutions.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.cmsOptionSet.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1263,34 +1301,34 @@ namespace MsCrmTools.MetadataBrowser.UserControls
         private System.Windows.Forms.ToolStripButton tsbHideEntityPanel;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.SplitContainer attributesSplitContainer;
-        private System.Windows.Forms.ListView attributeListView;
+        public System.Windows.Forms.ListView attributeListView;
         private System.Windows.Forms.ToolStrip attributeToolStrip;
         private System.Windows.Forms.ToolStripButton tsbHideAttributePanel;
         private System.Windows.Forms.ToolStripButton tsbAttributeColumns;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.SplitContainer oneToManySplitContainer;
-        private System.Windows.Forms.ListView OneToManyListView;
+        public System.Windows.Forms.ListView OneToManyListView;
         private System.Windows.Forms.PropertyGrid OneToManyPropertyGrid;
         private System.Windows.Forms.ToolStrip manyToOneToolStrip;
         private System.Windows.Forms.ToolStripButton tsbHideOneToManyPanel;
         private System.Windows.Forms.ToolStripButton tsbOneToManyColumns;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.SplitContainer manyToOneSplitContainer;
-        private System.Windows.Forms.ListView manyToOneListView;
+        public System.Windows.Forms.ListView manyToOneListView;
         private System.Windows.Forms.PropertyGrid manyToOnePropertyGrid;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton tsbHideManyToOnePanel;
         private System.Windows.Forms.ToolStripButton tsbManyToOneColumns;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.SplitContainer manyToManySplitContainer;
-        private System.Windows.Forms.ListView manyToManyListView;
+        public System.Windows.Forms.ListView manyToManyListView;
         private System.Windows.Forms.PropertyGrid manyToManyPropertyGrid;
         private System.Windows.Forms.ToolStrip manyToManyToolStrip;
         private System.Windows.Forms.ToolStripButton tsbHideManyToManyPanel;
         private System.Windows.Forms.ToolStripButton tsbManyToManyColumns;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.SplitContainer privilegeSplitContainer;
-        private System.Windows.Forms.ListView privilegeListView;
+        public System.Windows.Forms.ListView privilegeListView;
         private System.Windows.Forms.PropertyGrid privilegePropertyGrid;
         private System.Windows.Forms.ToolStrip privilegeToolStrip;
         private System.Windows.Forms.ToolStripButton tsbHidePrivilegePanel;
@@ -1300,7 +1338,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
         private System.Windows.Forms.ToolStripTextBox tstxtSearchContact;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.SplitContainer keySplitContainer;
-        private System.Windows.Forms.ListView keyListView;
+        public System.Windows.Forms.ListView keyListView;
         private System.Windows.Forms.PropertyGrid keyPropertyGrid;
         private System.Windows.Forms.ToolStrip keysToolStrip;
         private System.Windows.Forms.ToolStripButton tsbHideKeyPanel;
@@ -1333,7 +1371,7 @@ namespace MsCrmTools.MetadataBrowser.UserControls
         private System.Windows.Forms.ToolStripMenuItem tsmiRelNNCopyEntity1NavigationProperty;
         private System.Windows.Forms.ToolStripMenuItem tsmiRelNNCopyEntity2NavigationProperty;
         private System.Windows.Forms.TabPage tpSolutions;
-        private System.Windows.Forms.ListView lvSolutions;
+        public System.Windows.Forms.ListView lvSolutions;
         private System.Windows.Forms.ColumnHeader chSolutionFriendlyName;
         private System.Windows.Forms.ColumnHeader chSolutionUniqueName;
         private System.Windows.Forms.ColumnHeader chSolutionVersion;
