@@ -694,6 +694,12 @@ namespace MsCrmTools.MetadataBrowser.UserControls
             }
             attributeListView.Items.Clear();
             attributeListView.Items.AddRange(items.ToArray());
+
+            if (tabControl1.TabPages[1].ToolTipText == "")
+            {
+                tabControl1.TabPages[1].ToolTipText = tabControl1.TabPages[1].Text; 
+            }
+            tabControl1.TabPages[1].Text = tabControl1.TabPages[1].ToolTipText + " [" + attributeListView.Items.Count + "]";
         }
 
         private void LoadKeys(EntityKeyMetadata[] keys)
@@ -717,6 +723,12 @@ namespace MsCrmTools.MetadataBrowser.UserControls
 
             keyListView.Items.Clear();
             keyListView.Items.AddRange(items.ToArray());
+
+            if (tabControl1.TabPages[2].ToolTipText == "")
+            {
+                tabControl1.TabPages[2].ToolTipText = tabControl1.TabPages[2].Text;
+            }
+            tabControl1.TabPages[2].Text = tabControl1.TabPages[2].ToolTipText + " [" + keyListView.Items.Count + "]";
         }
 
         private void LoadManyToManyRelationships(IEnumerable<ManyToManyRelationshipMetadata> rels, string filter = null)
@@ -744,6 +756,12 @@ namespace MsCrmTools.MetadataBrowser.UserControls
 
             manyToManyListView.Items.Clear();
             manyToManyListView.Items.AddRange(items.ToArray());
+
+            if (tabControl1.TabPages[5].ToolTipText == "")
+            {
+                tabControl1.TabPages[5].ToolTipText = tabControl1.TabPages[5].Text;
+            }
+            tabControl1.TabPages[5].Text = tabControl1.TabPages[5].ToolTipText + " [" + manyToManyListView.Items.Count + "]";
         }
 
         private void LoadManyToOneRelationships(IEnumerable<OneToManyRelationshipMetadata> rels, string filter = null)
@@ -771,6 +789,12 @@ namespace MsCrmTools.MetadataBrowser.UserControls
 
             manyToOneListView.Items.Clear();
             manyToOneListView.Items.AddRange(items.ToArray());
+
+            if (tabControl1.TabPages[4].ToolTipText == "")
+            {
+                tabControl1.TabPages[4].ToolTipText = tabControl1.TabPages[4].Text;
+            }
+            tabControl1.TabPages[4].Text = tabControl1.TabPages[4].ToolTipText + " [" + manyToOneListView.Items.Count + "]";
         }
 
         private void LoadOneToManyRelationships(IEnumerable<OneToManyRelationshipMetadata> rels, string filter = null)
@@ -798,6 +822,12 @@ namespace MsCrmTools.MetadataBrowser.UserControls
 
             OneToManyListView.Items.Clear();
             OneToManyListView.Items.AddRange(items.ToArray());
+
+            if (tabControl1.TabPages[3].ToolTipText == "")
+            {
+                tabControl1.TabPages[3].ToolTipText = tabControl1.TabPages[3].Text;
+            }
+            tabControl1.TabPages[3].Text = tabControl1.TabPages[3].ToolTipText + " [" + OneToManyListView.Items.Count + "]";
         }
 
         private void LoadPrivileges(IEnumerable<SecurityPrivilegeMetadata> privileges)
@@ -816,6 +846,12 @@ namespace MsCrmTools.MetadataBrowser.UserControls
 
             privilegeListView.Items.Clear();
             privilegeListView.Items.AddRange(items.ToArray());
+
+            if (tabControl1.TabPages[6].ToolTipText == "")
+            {
+                tabControl1.TabPages[6].ToolTipText = tabControl1.TabPages[6].Text;
+            }
+            tabControl1.TabPages[6].Text = tabControl1.TabPages[6].ToolTipText + " [" + privilegeListView.Items.Count + "]";
         }
 
         private void LoadSolutions(EntityCollection components)
@@ -841,6 +877,12 @@ namespace MsCrmTools.MetadataBrowser.UserControls
 
             lvSolutions.Items.Clear();
             lvSolutions.Items.AddRange(items.ToArray());
+
+            if (tabControl1.TabPages[7].ToolTipText == "")
+            {
+                tabControl1.TabPages[7].ToolTipText = tabControl1.TabPages[7].Text;
+            }
+            tabControl1.TabPages[7].Text = tabControl1.TabPages[7].ToolTipText + " [" + lvSolutions.Items.Count + "]";
         }
 
         private void manyToManyListView_DoubleClick(object sender, EventArgs e)

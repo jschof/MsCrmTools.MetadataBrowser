@@ -108,8 +108,20 @@ namespace MsCrmTools.MetadataBrowser
                     // Add listview items to listview
                     entityListView.Items.AddRange(((List<ListViewItem>)e.Result).Where(i => i.Tag is EntityMetadata).ToArray());
 
+                    if (mainTabControl.TabPages[0].ToolTipText == "")
+                    {
+                        mainTabControl.TabPages[0].ToolTipText = mainTabControl.TabPages[0].Text;
+                    }
+                    mainTabControl.TabPages[0].Text = mainTabControl.TabPages[0].ToolTipText + " [" + entityListView.Items.Count + "]";
+
                     lvChoices.Items.Clear();
                     lvChoices.Items.AddRange(((List<ListViewItem>)e.Result).Where(i => i.Tag is OptionSetMetadata).ToArray());
+
+                    if (mainTabControl.TabPages[1].ToolTipText == "")
+                    {
+                        mainTabControl.TabPages[1].ToolTipText = mainTabControl.TabPages[1].Text;
+                    }
+                    mainTabControl.TabPages[1].Text = mainTabControl.TabPages[1].ToolTipText + " [" + lvChoices.Items.Count + "]";
                 }
             });
         }
@@ -680,7 +692,12 @@ namespace MsCrmTools.MetadataBrowser
             tstxtFilter.Enabled = mainTabControl.SelectedIndex == 0 || mainTabControl.SelectedIndex == 1 || mainTabControl.SelectedTab.Controls[0] is EntityPropertiesControl epc && epc.SelectedTabIndex != 1;
             tsbOpenInWebApp.Enabled = mainTabControl.SelectedIndex == 0 || mainTabControl.SelectedIndex == 1 || mainTabControl.SelectedTab.Controls[0] is EntityPropertiesControl epc2 && epc2.SelectedTabIndex == 0;
             toolStripSeparator5.Visible = mainTabControl.SelectedIndex == 0 || mainTabControl.SelectedIndex == 1;
+            tsbDeselectAllTables.Visible = mainTabControl.SelectedIndex == 0;
+            tsbSelectAllTables.Visible = mainTabControl.SelectedIndex == 0;
+            tsbSelectInverseTables.Visible = mainTabControl.SelectedIndex == 0;
+            tsbViewTables.Visible = mainTabControl.SelectedIndex == 0;
             tsbExportExcel.Visible = mainTabControl.SelectedIndex == 0 || mainTabControl.SelectedIndex == 1;
+            exportSelectedTablesToolStripMenuItem.Visible = mainTabControl.SelectedIndex == 0;
         }
 
         private void tsbClose_Click(object sender, EventArgs e)
@@ -869,10 +886,92 @@ namespace MsCrmTools.MetadataBrowser
             ExecuteMethod(LoadEntity);
         }
 
-        private void tsbExportExcelAll_Click(object sender, EventArgs e)
+        private void exportSelectedTablesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (entityListView.Items.Count == 0) return;
+            if (entityListView.SelectedItems.Count == 0) return;
 
+            if (mainTabControl.TabPages.Count > 2)
+            {
+                if (DialogResult.No == MessageBox.Show($"Existing opened tabs will be closed!\n\nAre you sure you want to continue?", "Confirm Operation", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) )
+                {
+                    return;
+                }
+            }
+
+            var sfd = new SaveFileDialog
+            {
+                Filter = @"Excel file (*.xlsx)|*.xlsx"
+            };
+
+            if (sfd.ShowDialog(this) != DialogResult.OK) return;
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage innerWorkBook = new ExcelPackage(new FileInfo(sfd.FileName));
+
+            var builder = new Builder();
+
+            builder.BuildFile(innerWorkBook, entityListView, "Tables");
+            builder.BuildFile(innerWorkBook, lvChoices, "Choices");
+
+            foreach (TabPage pgMain in mainTabControl.TabPages)
+            {
+                if ((pgMain.TabIndex == 0) || (pgMain.TabIndex == 1))
+                {
+                    continue;
+                }
+                else
+                {
+                    mainTabControl.TabPages.Remove(pgMain);
+                }
+            }
+
+            int[] SelectedItems = new int[entityListView.SelectedItems.Count];
+            int i = 0;
+
+            foreach (ListViewItem item in entityListView.SelectedItems)
+            {
+                // lvwSelectedItems.Add((ListViewItem)item.Clone());
+                SelectedItems[i] = item.Index;
+                i++;
+            }
+
+            entityListView.SelectedItems.Clear();
+
+            for (int j = 0; j < SelectedItems.Length; j++)
+            {
+                entityListView.Items[SelectedItems[j]].Selected = true;
+                ExecuteMethod(LoadEntity);
+                
+                while (mainTabControl.TabPages.Count <= 2)
+                { 
+                    Application.DoEvents();
+                }
+               
+                builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)mainTabControl.TabPages[2].Controls[0]).attributeListView, "Columns");
+                builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)mainTabControl.TabPages[2].Controls[0]).keyListView, "Keys");
+                builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)mainTabControl.TabPages[2].Controls[0]).OneToManyListView, "OneToManyRelationships");
+                builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)mainTabControl.TabPages[2].Controls[0]).manyToManyListView, "ManyToManyRelationships");
+//                builder.BuildFile(sfd.FileName, ((EntityPropertiesControl)mainTabControl.TabPages[2].Controls[0]).privilegeListView, "Privileges");
+                builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)mainTabControl.TabPages[2].Controls[0]).lvSolutions, "Solutions");
+
+                entityListView.Items[SelectedItems[j]].Selected = false;
+                mainTabControl.TabPages.RemoveAt(2);
+            }
+
+            innerWorkBook.SaveAs(new FileInfo(sfd.FileName));
+
+            if (DialogResult.Yes == MessageBox.Show(this,
+                    $"File saved to {sfd.FileName}!\n\nWould you like to open it now? (Requires Microsoft Excel)",
+                    "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+            {
+                Process.Start("Excel.exe", $"\"{sfd.FileName}\"");
+            }
+
+        }
+
+        private void exportOpenedTabsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             var sfd = new SaveFileDialog
             {
                 Filter = @"Excel file (*.xlsx)|*.xlsx"
@@ -900,10 +999,8 @@ namespace MsCrmTools.MetadataBrowser
                     builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).keyListView, "Keys");
                     builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).OneToManyListView, "OneToManyRelationships");
                     builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).manyToManyListView, "ManyToManyRelationships");
-//                    builder.BuildFile(sfd.FileName, ((EntityPropertiesControl)pgMain.Controls[0]).privilegeListView, "Privileges");
+                    //                builder.BuildFile(sfd.FileName, ((EntityPropertiesControl)pgMain.Controls[0]).privilegeListView, "Privileges");
                     builder.BuildFile(innerWorkBook, ((EntityPropertiesControl)pgMain.Controls[0]).lvSolutions, "Solutions");
-
-                    mainTabControl.TabPages.Remove(pgMain);
                 }
             }
 
@@ -914,6 +1011,67 @@ namespace MsCrmTools.MetadataBrowser
                     "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
             {
                 Process.Start("Excel.exe", $"\"{sfd.FileName}\"");
+            }
+        }
+
+        private void tsbExportExcel_ButtonClick(object sender, EventArgs e)
+        {
+            if (mainTabControl.SelectedIndex == 0)
+            {
+                if (entityListView.Items.Count == 0) return;
+
+                var sfd = new SaveFileDialog
+                {
+                    Filter = @"Excel file (*.xlsx)|*.xlsx"
+                };
+
+                if (sfd.ShowDialog(this) == DialogResult.OK)
+                {
+                    var builder = new Builder();
+                    builder.BuildFile(sfd.FileName, entityListView, "Tables", this);
+                }
+            }
+            else
+            {
+                if (lvChoices.Items.Count == 0) return;
+
+                var sfd = new SaveFileDialog
+                {
+                    Filter = @"Excel file (*.xlsx)|*.xlsx"
+                };
+
+                if (sfd.ShowDialog(this) == DialogResult.OK)
+                {
+                    var builder = new Builder();
+                    builder.BuildFile(sfd.FileName, lvChoices, "Choices", this);
+                }
+            }
+        }
+
+        private void tbsCloseTabs_Click(object sender, EventArgs e)
+        {
+            if (mainTabControl.TabPages.Count <= 2)
+            {
+                MessageBox.Show($"There are no opened tabs to close!", "Unable To Perofrm Operation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (DialogResult.No == MessageBox.Show($"All tabs (except Tables & Choices) will be closed!\n\nAre you sure you want to continue?", "Confirm Operation",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+            {
+                return;
+            }
+
+            foreach (TabPage pgMain in mainTabControl.TabPages)
+            {
+                if ((pgMain.TabIndex == 0) || (pgMain.TabIndex == 1))
+                {
+                    continue;
+                }
+                else
+                {
+                    mainTabControl.TabPages.Remove(pgMain);
+                }
             }
         }
     }

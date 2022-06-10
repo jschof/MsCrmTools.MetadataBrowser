@@ -63,6 +63,16 @@ namespace MsCrmTools.MetadataBrowser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DeleteTab {
+            get {
+                object obj = ResourceManager.GetObject("DeleteTab", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Deselect {
             get {
                 object obj = ResourceManager.GetObject("Deselect", resourceCulture);

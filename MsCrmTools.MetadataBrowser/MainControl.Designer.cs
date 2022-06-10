@@ -45,6 +45,7 @@
             this.tsbSelectAllTables = new System.Windows.Forms.ToolStripButton();
             this.tsbSelectInverseTables = new System.Windows.Forms.ToolStripButton();
             this.tsbViewTables = new System.Windows.Forms.ToolStripButton();
+            this.tbsCloseTabs = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEntityColumns = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -52,19 +53,20 @@
             this.tstxtFilter = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbOpenInWebApp = new System.Windows.Forms.ToolStripButton();
+            this.tsbExportExcel = new System.Windows.Forms.ToolStripSplitButton();
+            this.exportOpenedTabsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSelectedTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbExportExcel = new System.Windows.Forms.ToolStripButton();
-            this.tsbExportExcelAll = new System.Windows.Forms.ToolStripButton();
-            this.entityListView = new System.Windows.Forms.ListView();
             this.cmsEntity = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiEntityCopyLogicalName = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEntityCopyLogicalCollectionName = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEntityCopySchemaName = new System.Windows.Forms.ToolStripMenuItem();
             this.mainTabControl = new System.Windows.Forms.TabControl();
-            this.tbEntitiesList = new System.Windows.Forms.TabPage();
             this.tpOptionSet = new System.Windows.Forms.TabPage();
             this.scOptionSet = new System.Windows.Forms.SplitContainer();
             this.lvChoices = new System.Windows.Forms.ListView();
+            this.entityListView = new System.Windows.Forms.ListView();
+            this.tbEntitiesList = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.scMetadata)).BeginInit();
             this.scMetadata.Panel1.SuspendLayout();
             this.scMetadata.Panel2.SuspendLayout();
@@ -73,12 +75,12 @@
             this.toolStrip1.SuspendLayout();
             this.cmsEntity.SuspendLayout();
             this.mainTabControl.SuspendLayout();
-            this.tbEntitiesList.SuspendLayout();
             this.tpOptionSet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scOptionSet)).BeginInit();
             this.scOptionSet.Panel1.SuspendLayout();
             this.scOptionSet.Panel2.SuspendLayout();
             this.scOptionSet.SuspendLayout();
+            this.tbEntitiesList.SuspendLayout();
             this.SuspendLayout();
             // 
             // scMetadata
@@ -158,6 +160,7 @@
             this.tsbSelectAllTables,
             this.tsbSelectInverseTables,
             this.tsbViewTables,
+            this.tbsCloseTabs,
             this.toolStripSeparator2,
             this.tsbEntityColumns,
             this.toolStripSeparator3,
@@ -165,9 +168,8 @@
             this.tstxtFilter,
             this.toolStripSeparator4,
             this.tsbOpenInWebApp,
-            this.toolStripSeparator5,
             this.tsbExportExcel,
-            this.tsbExportExcelAll});
+            this.toolStripSeparator5});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
@@ -251,7 +253,18 @@
             this.tsbViewTables.Name = "tsbViewTables";
             this.tsbViewTables.Size = new System.Drawing.Size(52, 22);
             this.tsbViewTables.Text = "View";
+            this.tsbViewTables.ToolTipText = "View Selected Tables";
             this.tsbViewTables.Click += new System.EventHandler(this.tsbViewTables_Click);
+            // 
+            // tbsCloseTabs
+            // 
+            this.tbsCloseTabs.Image = global::MsCrmTools.MetadataBrowser.Properties.Resources.DeleteTab;
+            this.tbsCloseTabs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbsCloseTabs.Name = "tbsCloseTabs";
+            this.tbsCloseTabs.Size = new System.Drawing.Size(82, 22);
+            this.tbsCloseTabs.Text = "Close Tabs";
+            this.tbsCloseTabs.ToolTipText = "Close Opened Tabs";
+            this.tbsCloseTabs.Click += new System.EventHandler(this.tbsCloseTabs_Click);
             // 
             // toolStripSeparator2
             // 
@@ -302,49 +315,37 @@
             this.tsbOpenInWebApp.Text = "Open in web app";
             this.tsbOpenInWebApp.Click += new System.EventHandler(this.tsbOpenInWebApp_Click);
             // 
+            // tsbExportExcel
+            // 
+            this.tsbExportExcel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportOpenedTabsToolStripMenuItem,
+            this.exportSelectedTablesToolStripMenuItem});
+            this.tsbExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportExcel.Image")));
+            this.tsbExportExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbExportExcel.Name = "tsbExportExcel";
+            this.tsbExportExcel.Size = new System.Drawing.Size(73, 22);
+            this.tsbExportExcel.Text = "Export";
+            this.tsbExportExcel.ToolTipText = "Export to Excel";
+            this.tsbExportExcel.ButtonClick += new System.EventHandler(this.tsbExportExcel_ButtonClick);
+            // 
+            // exportOpenedTabsToolStripMenuItem
+            // 
+            this.exportOpenedTabsToolStripMenuItem.Name = "exportOpenedTabsToolStripMenuItem";
+            this.exportOpenedTabsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.exportOpenedTabsToolStripMenuItem.Text = "Export Opened Tabs";
+            this.exportOpenedTabsToolStripMenuItem.Click += new System.EventHandler(this.exportOpenedTabsToolStripMenuItem_Click);
+            // 
+            // exportSelectedTablesToolStripMenuItem
+            // 
+            this.exportSelectedTablesToolStripMenuItem.Name = "exportSelectedTablesToolStripMenuItem";
+            this.exportSelectedTablesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.exportSelectedTablesToolStripMenuItem.Text = "Export Selected Tables";
+            this.exportSelectedTablesToolStripMenuItem.Click += new System.EventHandler(this.exportSelectedTablesToolStripMenuItem_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbExportExcel
-            // 
-            this.tsbExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("tsbExportExcel.Image")));
-            this.tsbExportExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbExportExcel.Name = "tsbExportExcel";
-            this.tsbExportExcel.Size = new System.Drawing.Size(61, 22);
-            this.tsbExportExcel.Text = "Export";
-            this.tsbExportExcel.ToolTipText = "Export to Excel";
-            this.tsbExportExcel.Click += new System.EventHandler(this.tsbExportExcel_Click);
-            // 
-            // tsbExportExcelAll
-            // 
-            this.tsbExportExcelAll.Image = global::MsCrmTools.MetadataBrowser.Properties.Resources.Excel;
-            this.tsbExportExcelAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbExportExcelAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbExportExcelAll.Name = "tsbExportExcelAll";
-            this.tsbExportExcelAll.Size = new System.Drawing.Size(78, 22);
-            this.tsbExportExcelAll.Text = "Export All";
-            this.tsbExportExcelAll.ToolTipText = "Export All to Excel";
-            this.tsbExportExcelAll.Click += new System.EventHandler(this.tsbExportExcelAll_Click);
-            // 
-            // entityListView
-            // 
-            this.entityListView.ContextMenuStrip = this.cmsEntity;
-            this.entityListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.entityListView.FullRowSelect = true;
-            this.entityListView.GridLines = true;
-            this.entityListView.HideSelection = false;
-            this.entityListView.Location = new System.Drawing.Point(2, 2);
-            this.entityListView.Margin = new System.Windows.Forms.Padding(2);
-            this.entityListView.Name = "entityListView";
-            this.entityListView.Size = new System.Drawing.Size(981, 474);
-            this.entityListView.TabIndex = 0;
-            this.entityListView.UseCompatibleStateImageBehavior = false;
-            this.entityListView.View = System.Windows.Forms.View.Details;
-            this.entityListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView_ColumnClick);
-            this.entityListView.SelectedIndexChanged += new System.EventHandler(this.entityListView_SelectedIndexChanged);
-            this.entityListView.DoubleClick += new System.EventHandler(this.entityListView_DoubleClick);
             // 
             // cmsEntity
             // 
@@ -387,18 +388,6 @@
             this.mainTabControl.Size = new System.Drawing.Size(993, 504);
             this.mainTabControl.TabIndex = 7;
             this.mainTabControl.SelectedIndexChanged += new System.EventHandler(this.mainTabControl_SelectedIndexChanged);
-            // 
-            // tbEntitiesList
-            // 
-            this.tbEntitiesList.Controls.Add(this.entityListView);
-            this.tbEntitiesList.Location = new System.Drawing.Point(4, 22);
-            this.tbEntitiesList.Margin = new System.Windows.Forms.Padding(2);
-            this.tbEntitiesList.Name = "tbEntitiesList";
-            this.tbEntitiesList.Padding = new System.Windows.Forms.Padding(2);
-            this.tbEntitiesList.Size = new System.Drawing.Size(985, 478);
-            this.tbEntitiesList.TabIndex = 0;
-            this.tbEntitiesList.Text = "Tables";
-            this.tbEntitiesList.UseVisualStyleBackColor = true;
             // 
             // tpOptionSet
             // 
@@ -448,6 +437,36 @@
             this.lvChoices.SelectedIndexChanged += new System.EventHandler(this.entityListView_SelectedIndexChanged);
             this.lvChoices.DoubleClick += new System.EventHandler(this.entityListView_DoubleClick);
             // 
+            // entityListView
+            // 
+            this.entityListView.ContextMenuStrip = this.cmsEntity;
+            this.entityListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.entityListView.FullRowSelect = true;
+            this.entityListView.GridLines = true;
+            this.entityListView.HideSelection = false;
+            this.entityListView.Location = new System.Drawing.Point(2, 2);
+            this.entityListView.Margin = new System.Windows.Forms.Padding(2);
+            this.entityListView.Name = "entityListView";
+            this.entityListView.Size = new System.Drawing.Size(981, 474);
+            this.entityListView.TabIndex = 0;
+            this.entityListView.UseCompatibleStateImageBehavior = false;
+            this.entityListView.View = System.Windows.Forms.View.Details;
+            this.entityListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView_ColumnClick);
+            this.entityListView.SelectedIndexChanged += new System.EventHandler(this.entityListView_SelectedIndexChanged);
+            this.entityListView.DoubleClick += new System.EventHandler(this.entityListView_DoubleClick);
+            // 
+            // tbEntitiesList
+            // 
+            this.tbEntitiesList.Controls.Add(this.entityListView);
+            this.tbEntitiesList.Location = new System.Drawing.Point(4, 22);
+            this.tbEntitiesList.Margin = new System.Windows.Forms.Padding(2);
+            this.tbEntitiesList.Name = "tbEntitiesList";
+            this.tbEntitiesList.Padding = new System.Windows.Forms.Padding(2);
+            this.tbEntitiesList.Size = new System.Drawing.Size(985, 478);
+            this.tbEntitiesList.TabIndex = 0;
+            this.tbEntitiesList.Text = "Tables";
+            this.tbEntitiesList.UseVisualStyleBackColor = true;
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,12 +485,12 @@
             this.toolStrip1.PerformLayout();
             this.cmsEntity.ResumeLayout(false);
             this.mainTabControl.ResumeLayout(false);
-            this.tbEntitiesList.ResumeLayout(false);
             this.tpOptionSet.ResumeLayout(false);
             this.scOptionSet.Panel1.ResumeLayout(false);
             this.scOptionSet.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scOptionSet)).EndInit();
             this.scOptionSet.ResumeLayout(false);
+            this.tbEntitiesList.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -482,18 +501,15 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbClose;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ListView entityListView;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbEntityColumns;
         private System.Windows.Forms.TabControl mainTabControl;
-        private System.Windows.Forms.TabPage tbEntitiesList;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel tslSearch;
         private System.Windows.Forms.ToolStripTextBox tstxtFilter;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbOpenInWebApp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripButton tsbExportExcel;
         private System.Windows.Forms.ToolStripSplitButton tssbLoadEntities;
         private System.Windows.Forms.ToolStripMenuItem tsmiLoadEntitiesFromSolution;
         private System.Windows.Forms.ContextMenuStrip cmsEntity;
@@ -513,6 +529,11 @@
         private System.Windows.Forms.ToolStripButton tsbSelectAllTables;
         private System.Windows.Forms.ToolStripButton tsbSelectInverseTables;
         private System.Windows.Forms.ToolStripButton tsbViewTables;
-        private System.Windows.Forms.ToolStripButton tsbExportExcelAll;
+        private System.Windows.Forms.ToolStripSplitButton tsbExportExcel;
+        private System.Windows.Forms.ToolStripMenuItem exportSelectedTablesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportOpenedTabsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tbsCloseTabs;
+        private System.Windows.Forms.TabPage tbEntitiesList;
+        private System.Windows.Forms.ListView entityListView;
     }
 }
